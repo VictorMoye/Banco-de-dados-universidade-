@@ -1,7 +1,8 @@
 
 select * from aluno ;
-select * from tbtelefone;
+drop table tbtelefone;
 
+select * from telefone;
 desc aluno;
 select * from aluno;
 select * from telefone;
@@ -13,8 +14,11 @@ CREATE TABLE TELEFONE (
     numero varchar(20),
     tipo char(3)
 );
+# inserindo os telefones do aluno 
 
 insert into telefone(numero, tipo) values('11 5555-2222', 'res');
 insert into telefone(numero, tipo) values('11 3333-4444', 'com');
 
+# tirando a coluna telefone do aluno 
 alter table aluno drop column telefone;
+
