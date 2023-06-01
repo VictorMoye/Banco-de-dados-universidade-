@@ -43,3 +43,4 @@ insert into aluno_curso(fk_idaluno, fk_idcurso)values(3, 4);
 insert into aluno_curso(fk_idaluno, fk_idcurso)values(4, 1);
 
 select * from aluno_curso;
+desc aluno_curso
