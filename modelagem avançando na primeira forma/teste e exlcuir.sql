@@ -1,0 +1,3 @@
+
+
+ALTER TABLE gasto RENAME COLUMN fev TO fevv;

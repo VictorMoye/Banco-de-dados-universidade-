@@ -1,5 +1,5 @@
-create database universidade_u;
-use universidade_u;
+create database universidade_a;
+use universidade_a;
 
 CREATE TABLE aluno (
     sexo char(1),
@@ -288,6 +288,156 @@ where
 	idaluno in(1, 4, 5);
 
 
+select 
+	nome, count(*) as repeticao_nome_agrupamento 
+from 
+	aluno 
+group by 
+	nome;
+    
+select 
+	* 
+from 
+	aluno
+group by
+	ativo_sn;
+	
+    
+select 
+	ativo_sn, count(*) as repeticao_ativo_sn_agrupamento
+from 
+	aluno
+group by
+	ativo_sn;	
+    
+    
+select 
+	ativo_sn, nome, count(*) as repeticao_agrupamento
+from 
+	aluno
+group by
+	ativo_sn, nome;
+    
+update aluno set nome = 'Rosa' where nome = 'Maria';    
+
+/* --------- */  
+select 
+	ativo_sn, 
+    round(avg(valor_pago_curso), 2) as media_por_agrupamento
+from 
+	aluno
+group by
+	ativo_sn;
+/* --------- */    
+
+select 
+	sexo, floor(avg(idade)) as media_idade_por_sexo
+from 
+	aluno
+group by
+	sexo;
+    
+/* --------- */    
+
+select 
+	sexo, 
+    min(idade) as menor_idade_do_agrupamento, 
+    max(idade) as maior_idade_do_agrupamento
+from 
+	aluno
+group by
+	sexo;
+    
+select idade from aluno where sexo = 'f'; 
+select idade from aluno where sexo = 'm'; 
+
+select 
+	estado, count(*) as total_por_estado
+from 
+	endereco
+group by 
+	estado;
+    
+select 
+	tipo, count(*) as total_por_tipo
+from 
+	telefone
+group by 
+	tipo;
+    
+    
 
 
+/* estados com mais alunos -  alunos por estado */
+select 
+	estado, count(*) as total 
+from 
+	endereco
+group by 
+	estado
+order by total desc
+limit 3;   
+    
+
+/* cursos mais vendidos - alunos por curso*/
+select 
+	fk_idcurso, count(*) as total
+from 
+	aluno_curso
+group by
+	fk_idcurso;	
+    
+select distinct(fk_idcurso) from aluno_curso;
+
+/*
+1 - 2
+2 - 2
+3 - 2
+4 - 2
+*/
+
+select * from aluno_curso;      
+
+use universidade_u;
+
+create table gasto(
+	idgasto int primary key auto_increment,
+    ano int not null,
+    tipo enum('previsto','realizado') not null,
+    jan float(10,2),
+    fev float(10,2),
+    mar float(10,2),
+    abr float(10,2),
+    mai float(10,2),
+    jun float(10,2),
+    jul float(10,2),
+    ago float(10,2),
+    `set` float(10,2),
+    `out` float(10,2),
+    nov float(10,2),
+    dez float(10,2)
+);
+
+
+
+insert into gasto(ano, tipo, jan, fev, mar, abr, mai, jun, jul, ago, `set`, `out`, nov, dez)values('2019', 'previsto', 18000, 17000, 19000, 20000, 17000, 18000, 18500, 18500, 1800, 17500, 18000, 17000);
+insert into gasto(ano, tipo, jan)values('2019', 'realizado', 18353.20);
+update gasto set fev = 17555.55 where idgasto = 2;
+update gasto set mar = 19435.73 where idgasto = 2;
+update gasto set abr = 22753.12 where idgasto = 2;
+update gasto set mai = 16198.12 where idgasto = 2;
+update gasto set jun = 17451.88 where idgasto = 2;
+update gasto set jul = 18975.40 where idgasto = 2;
+update gasto set ago = 19163.84 where idgasto = 2;
+update gasto set `set` = 18132.56 where idgasto = 2;
+update gasto set `out` = 17667.91 where idgasto = 2;
+update gasto set nov = 17936.33 where idgasto = 2;
+update gasto set dez = 17125.88 where idgasto = 2;
+
+# modificando o nome da coluna referente a setembro e outubro 
+# alter table gasto rename column `set` to setbro; // rename colunm não esta funcionando não sei o porque...
+ALTER TABLE gasto CHANGE `set` setbr float(10,2) ;
+ALTER TABLE gasto CHANGE `out` outbr float(10,2) ;
+
+select * from gasto;
 
